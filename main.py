@@ -71,29 +71,29 @@ async def on_message(message):
 
 
 async def send_apple_stock(
-    product_id: list[str] = my_product_list,
-    location_zip: int = os.getenv("LOCATION_ZIP"),
-    distance: int = 5,
+    product_id=my_product_list,
+    location_zip=os.getenv("LOCATION_ZIP"),
+    distance=5,
 ):
     """
     send the stock of a product at a given location.
     """
     # use query string to get stock
-    BASE_URL: str = "https://www.apple.com/shop/retail/pickup-message?"
-    counter: int = 0
+    BASE_URL = "https://www.apple.com/shop/retail/pickup-message?"
+    counter = 0
 
-    DEVICE_STRING: str = ""
+    DEVICE_STRING = ""
     for product in product_id:
         DEVICE_STRING += f"parts.{counter}={product}&"
         counter += 1
 
-    LOCATION_STRING: str = f"location={location_zip}"
-    url: str = BASE_URL + DEVICE_STRING + LOCATION_STRING
+    LOCATION_STRING = f"location={location_zip}"
+    url = BASE_URL + DEVICE_STRING + LOCATION_STRING
 
     # json response
     import requests
 
-    response: dict = requests.get(url).json()
+    response = requests.get(url).json()
     if response["head"].get("status") != "200":
         # send error message to discord channel
         await print_and_send(f"Error: {response['head']['status']}")
