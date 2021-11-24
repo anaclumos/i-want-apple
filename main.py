@@ -13,6 +13,15 @@ my_product_list = [
     "MLU03LL/A",  # iPhone 13 Pro 256GB Sierra Blue
     "MLU73LL/A",  # iPhone 13 Pro 512GB Sierra Blue
     "MLUD3LL/A",  # iPhone 13 Pro 1TB Sierra Blue
+    "MLKV3LL/A",  # iPhone 13 Pro Max 256GB Sierra Blue
+    "MLL03LL/A",  # iPhone 13 Pro Max 512GB Sierra Blue
+    "MLL53LL/A",  # iPhone 13 Pro Max 1TB Sierra Blue
+    "MLKT3LL/A",  # iPhone 13 Pro Max 256GB Silver
+    "MLKX3LL/A",  # iPhone 13 Pro Max 512GB Silver
+    "MLL33LL/A",  # iPhone 13 Pro Max 1TB Silver
+    "MLKR3LL/A",  # iPhone 13 Pro Max 256GB Graphite
+    "MLKW3LL/A",  # iPhone 13 Pro Max 512GB Graphite
+    "MLL23LL/A",  # iPhone 13 Pro Max 1TB Graphite
 ]
 
 # initial setup
