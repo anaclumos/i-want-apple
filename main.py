@@ -82,7 +82,7 @@ async def on_message(message):
 async def send_apple_stock(
     product_id=my_product_list,
     location_zip=os.getenv("LOCATION_ZIP"),
-    distance=5,
+    distance=100,
 ):
     """
     send the stock of a product at a given location.
@@ -109,26 +109,24 @@ async def send_apple_stock(
     else:
         # purify response
         final_response = []
+        discord_payload = []
         body = response["body"]
         for store in body["stores"]:
             if int(store["storedistance"]) <= distance:
                 store_data = store["partsAvailability"]
                 # traverse key value
                 for key, value in store_data.items():
-                    final_response.append(
+                    discord_payload.append(
                         value["storePickupProductTitle"]
-                        + ": "
+                        + "\n"
                         + value["storePickupQuote"]
                     )
-                await print_and_send("\n".join(final_response))
-                final_response = []
-
+                final_response.extend(discord_payload)
+                discord_payload = []
         something_is_available = False
         for product in final_response:
-            if "unavailable" in product:
-                pass
-            else:
-                await print_and_send("**Hooray!** " + product)
+            if "today" in product.lower():
+                await print_and_send(product)
                 something_is_available = True
         if not something_is_available:
             await print_and_send("**No stock available.**")
