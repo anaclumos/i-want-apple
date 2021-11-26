@@ -59,8 +59,6 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content.lower().startswith("!ping"):
-        # send back pong with current time and server data
-        # message author timezone
         await message.channel.send(
             f"pong! {message.author.mention}"
             + "\nTime: "
@@ -73,16 +71,16 @@ async def on_message(message):
             + str(message.guild.id)
             + ")"
         )
-        # current channel id
 
     if message.content.lower().startswith("!stock"):
-        await send_apple_stock()
+        await send_apple_stock(send_message_when_no_stock=True)
 
 
 async def send_apple_stock(
     product_id=my_product_list,
     location_zip=os.getenv("LOCATION_ZIP"),
     distance=100,
+    send_message_when_no_stock=False,
 ):
     """
     send the stock of a product at a given location.
@@ -128,7 +126,7 @@ async def send_apple_stock(
             if "today" in product.lower():
                 await print_and_send(product)
                 something_is_available = True
-        if not something_is_available:
+        if not something_is_available and send_message_when_no_stock:
             await print_and_send("**No stock available.**")
 
 
